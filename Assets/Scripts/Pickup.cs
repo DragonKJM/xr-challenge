@@ -53,5 +53,5 @@ public class Pickup : MonoBehaviour
 		IsCollected = true;
 		animator.PlayCollected();
 		OnPickUp?.Invoke(this);
-	}
+    }
 }
