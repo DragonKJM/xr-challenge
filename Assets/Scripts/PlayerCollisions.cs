@@ -20,18 +20,26 @@ public class PlayerCollisions : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Pickup"))
+        if (other.transform.CompareTag("Pickup")) // Would normally use a switch statement here, but using CompareTag seems more worthwhile
         {
             if (other.transform.TryGetComponent(out Pickup pickupScript))
             {
                 pickupScript.GetPickedUp();
-                Debug.Log("Picked up Pickup!");
-                pickupTracker.RemovePickup(pickupScript);
             }
             else
             {
                 Debug.LogError("Pickup script not found on the collided GameObject.");
             }
+        }
+
+        else if (other.transform.CompareTag("Finish"))
+        {
+            Debug.Log("PLAYER REACHED GOAL");
+        }
+
+        else
+        {
+            Debug.LogError("Player Trigger not recognised");
         }
     }
 }

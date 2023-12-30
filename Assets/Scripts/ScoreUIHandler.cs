@@ -21,9 +21,9 @@ public class ScoreUIHandler : MonoBehaviour
 
     public void UpdateScore(int scoreToAdd)
     {
-        targetScore += scoreToAdd;
+        targetScore += scoreToAdd; // First updates the target score with gained score
 
-        if (!isUpdatingScore)
+        if (!isUpdatingScore) // If already updating, it should still reach targetScore
         {
             StartCoroutine(UpdateScoreCoroutine());
         }
@@ -35,13 +35,13 @@ public class ScoreUIHandler : MonoBehaviour
 
         while (currentScore < targetScore)
         {
-            currentScore = Mathf.Min(targetScore, currentScore + Mathf.CeilToInt(updateSpeed * Time.deltaTime));
+            currentScore = Mathf.Min(targetScore, currentScore + Mathf.CeilToInt(updateSpeed * Time.deltaTime)); // Returns smallest number out of target and an increased currentScore
             tmp.text = ("SCORE: " + currentScore);
 
             yield return null;
         }
 
-        currentScore = targetScore;
+        currentScore = targetScore; // currentScore likely went over target, so I set it manually
 
         isUpdatingScore = false;
     }

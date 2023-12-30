@@ -28,13 +28,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        camForward = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized; // using scale to eliminate y axis, normalising to remove potential world-space
+        camForward = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized; // Using scale to eliminate y axis, normalising to remove potential world-space
         camRight = Vector3.Scale(cam.transform.right, new Vector3(1, 0, 1)).normalized;
-    }
-    
-    void Update()
-    {
-        
     }
 
     private void FixedUpdate()
@@ -46,16 +41,16 @@ public class PlayerController : MonoBehaviour
     {
         if (context.canceled)
         {
-            currentPlayerSpeed = 0f;
+            currentPlayerSpeed = 0f; // If button is released, stop moving
             return;
         }
 
         if (!context.performed)
             return;
 
-        Vector2 newDirection = context.ReadValue<Vector2>();
-        movementDirection = camForward * newDirection.y + camRight * newDirection.x; //Y axis is actually the Z axis here
+        Vector2 newDirection = context.ReadValue<Vector2>(); //Reads direction as X Y coordinates
+        movementDirection = camForward * newDirection.y + camRight * newDirection.x; // Y axis is actually our Z axis
 
-        currentPlayerSpeed = basePlayerSpeed; //will only activate when button is pressed
+        currentPlayerSpeed = basePlayerSpeed; // Set speed on button press, can be multiplied with any modifiers
     }
 }
