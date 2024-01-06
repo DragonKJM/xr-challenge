@@ -8,6 +8,7 @@ public class PickupTracker : MonoBehaviour
     private int numPickupsCollected;
 
     [Header("References")]
+    [SerializeField]
     private List<Pickup> pickups = new List<Pickup>();
     private ScoreUIHandler scoreScript;
     private Goal goal;
