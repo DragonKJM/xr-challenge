@@ -17,6 +17,7 @@ public class WatchTowerPickupGenerator : MonoBehaviour
     private Image progressBar;
 
     [Header("Spawn Tracking")]
+    public bool IsPlaced = false; // Should use a setter instead of public variable
     private float timer = 0.0f;
 
     private void Start()
@@ -33,17 +34,17 @@ public class WatchTowerPickupGenerator : MonoBehaviour
             if (imageInCanvas != null)
             {
                 progressBar = imageInCanvas.transform.Find("ProgressBar").GetComponent<Image>(); // For some reason, using GetComponentInChildren again here returns the imageInCanvas again
-
-                if (progressBar != null)
-                {
-                    Debug.Log("got Image " + progressBar.name);
-                }
             }
         }
     }
 
     private void Update()
     {
+        progressBar.canvas.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+
+        if (!IsPlaced)
+            return;
+
         timer += Time.deltaTime;
         progressBar.fillAmount = timer / timeToGenerate;
 
@@ -64,12 +65,34 @@ public class WatchTowerPickupGenerator : MonoBehaviour
             if (pickupScript.IsCollected)
             {
                 pickupScript.Init();
-                pickup.transform.position = transform.position + new Vector3(2.0f, 0.0f, 0.0f);
+                pickup.transform.position = transform.position;
 
-                tracker.AddPickup(pickup.GetComponent<Pickup>());
+                Rigidbody pickupRigidbody = pickup.AddComponent<Rigidbody>(); // Allows below physics simulation
+
+                float jumpHeight = 3.0f;
+                pickupRigidbody.velocity = new Vector3(0.0f, Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics.gravity.y)), 0.0f) + transform.forward; // Formula finds initial velocity (sqrt) for up and down (2) of jumpheight, and negates gravity
+
+                tracker.AddPickup(pickup.GetComponent<Pickup>()); // Log pickup and subscribe events
+
+                StartCoroutine(RemovePickupRigidbody(pickupRigidbody)); // Remove rigidbody after reaching specified Y pos, so it doesn't fall through the floor
 
                 return; // Return after finding first available pickup
             }
+        }
+    }
+
+    IEnumerator RemovePickupRigidbody(Rigidbody rigidbodyToRemove)
+    {
+        float desiredYPos = 0.0f;
+
+        while (rigidbodyToRemove != null && rigidbodyToRemove.gameObject.transform.position.y >= desiredYPos)
+        {
+            yield return null; // Wait for the next frame
+        }
+
+        if (rigidbodyToRemove != null)
+        {
+            Destroy(rigidbodyToRemove);
         }
     }
 

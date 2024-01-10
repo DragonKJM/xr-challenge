@@ -771,6 +771,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1879566365, guid: 9c436d2eaf5a77e48a26bcbc3a68e3cb, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1942245548449254, guid: 9c436d2eaf5a77e48a26bcbc3a68e3cb, type: 3}
       propertyPath: m_Name
       value: Pickup
@@ -916,6 +920,7 @@ GameObject:
   - component: {fileID: 1342394706}
   - component: {fileID: 1342394707}
   - component: {fileID: 1342394709}
+  - component: {fileID: 1342394710}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1073,6 +1078,54 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 38f37ebd-2106-43bd-9c81-a2f734c1aec9
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1342394710}
+        m_TargetAssemblyTypeName: BuildController, Assembly-CSharp
+        m_MethodName: OnBuildSelect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 18b19e82-9749-472e-ada8-cae57c811f37
+    m_ActionName: Player/Select Build[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1342394710}
+        m_TargetAssemblyTypeName: BuildController, Assembly-CSharp
+        m_MethodName: OnBuildPlacement
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4c6a1450-5706-4c56-8239-719ca23ee71b
+    m_ActionName: Player/Place Build[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1342394710}
+        m_TargetAssemblyTypeName: BuildController, Assembly-CSharp
+        m_MethodName: UpdatePlacementDirection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2fde57bb-6c42-4d90-bee6-95034e713ce2
+    m_ActionName: Player/New action[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1090,6 +1143,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01e9380beebc14e4eabb55ed87f49211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1342394710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342394701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416d5dc60364fd0478a5b6611c0cc43f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placementRadius: 2
+  watchTower: {fileID: 2265306987326160552, guid: 273cb39fe0c434a4b8301bb02e479403,
+    type: 3}
 --- !u!1001 &1368476732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1107,6 +1175,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1879566365, guid: 9c436d2eaf5a77e48a26bcbc3a68e3cb, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879566365, guid: 9c436d2eaf5a77e48a26bcbc3a68e3cb, type: 3}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1942245548449254, guid: 9c436d2eaf5a77e48a26bcbc3a68e3cb, type: 3}
@@ -1186,6 +1258,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1879566365, guid: 9c436d2eaf5a77e48a26bcbc3a68e3cb, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879566365, guid: 9c436d2eaf5a77e48a26bcbc3a68e3cb, type: 3}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1942245548449254, guid: 9c436d2eaf5a77e48a26bcbc3a68e3cb, type: 3}
@@ -1686,75 +1762,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2025783843}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &2132752105
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2265306987326160552, guid: 273cb39fe0c434a4b8301bb02e479403,
-        type: 3}
-      propertyPath: m_Name
-      value: WatchTower
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003964605374856302, guid: 273cb39fe0c434a4b8301bb02e479403,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003964605374856302, guid: 273cb39fe0c434a4b8301bb02e479403,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.889371
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003964605374856302, guid: 273cb39fe0c434a4b8301bb02e479403,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.8759756
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003964605374856302, guid: 273cb39fe0c434a4b8301bb02e479403,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.93000746
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003964605374856302, guid: 273cb39fe0c434a4b8301bb02e479403,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003964605374856302, guid: 273cb39fe0c434a4b8301bb02e479403,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003964605374856302, guid: 273cb39fe0c434a4b8301bb02e479403,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003964605374856302, guid: 273cb39fe0c434a4b8301bb02e479403,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003964605374856302, guid: 273cb39fe0c434a4b8301bb02e479403,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003964605374856302, guid: 273cb39fe0c434a4b8301bb02e479403,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003964605374856302, guid: 273cb39fe0c434a4b8301bb02e479403,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 273cb39fe0c434a4b8301bb02e479403, type: 3}
 --- !u!1001 &4233253551752498145
 PrefabInstance:
   m_ObjectHideFlags: 0

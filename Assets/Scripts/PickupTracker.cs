@@ -41,7 +41,7 @@ public class PickupTracker : MonoBehaviour
 
         foreach (Pickup pickup in allPickups)
         {
-            AddPickup(pickup);
+            pickup.GetPickedUp(); // Setting isCollected to true, without adding score
         }
     }
 
