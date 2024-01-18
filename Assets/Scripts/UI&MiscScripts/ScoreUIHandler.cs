@@ -19,7 +19,7 @@ public class ScoreUIHandler : MonoBehaviour
         tmp = GetComponent<TextMeshProUGUI>();
     }
 
-    public void UpdateScore(int scoreToAdd)
+    public void AddScore(int scoreToAdd)
     {
         targetScore += scoreToAdd; // First updates the target score with gained score
 

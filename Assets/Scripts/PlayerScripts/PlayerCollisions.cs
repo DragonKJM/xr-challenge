@@ -37,6 +37,11 @@ public class PlayerCollisions : MonoBehaviour
             Debug.Log("PLAYER REACHED GOAL");
         }
 
+        else if (other.transform.CompareTag("Spawner"))
+        {
+           // Ignore
+        }
+
         else
         {
             Debug.LogError("Player Trigger not recognised");

@@ -11,7 +11,9 @@ public class BuildController : MonoBehaviour
     [SerializeField]
     private float placementRadius = 2.0f;
     private Vector3 placementDirection;
-    private bool watchTowerPlaced = false; // wouldn't be used in a real game, this is to limit user to a single watchTower
+    public Vector3 PlacementDirection => placementDirection; //used in PlayerController
+
+    private bool watchTowerPlaced = false; // Wouldn't be used in a real game, this is to limit user to a single watchTower
 
     [Header("References")]
     [SerializeField]

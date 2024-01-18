@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,14 +18,20 @@ public class PlayerController : MonoBehaviour
     private Vector3 camForward;
     private Vector3 camRight;
 
+    private float attackDistance = 2.0f;
+    private float attackDamage = 10.0f;
+    private float attackRadius = 1.0f;
+
     [Header("References")]
     private Rigidbody rb;
     private Camera cam;
+    private BuildController buildController;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         cam = Camera.main;
+        buildController = GetComponent<BuildController>();
     }
 
     void Start()
@@ -53,5 +60,30 @@ public class PlayerController : MonoBehaviour
         movementDirection = camForward * newDirection.y + camRight * newDirection.x; // Y axis is actually our Z axis
 
         currentPlayerSpeed = basePlayerSpeed; // Set speed on button press, can be multiplied with any modifiers
+    }
+
+    public void OnPlayerAttack(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+
+        Vector3 attackPos = transform.position + (buildController.PlacementDirection * attackDistance);
+
+        Collider[] hitColliders = Physics.OverlapSphere(attackPos, attackRadius); // Creates sphere to grab colliders in hit location
+
+        foreach (Collider hitCollider in hitColliders)
+        {
+            if (hitCollider.transform.CompareTag("Enemy")) // If has enemy tag
+            {
+                HealthManager enemy = hitCollider.GetComponent<HealthManager>();
+
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(attackDamage);
+                    enemy.Shake(0.1f, 0.05f);
+                }
+            }
+        }
+
     }
 }

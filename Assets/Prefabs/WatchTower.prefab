@@ -347,9 +347,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3003964605374856302}
   - component: {fileID: 1202684138}
+  - component: {fileID: 1807471647585145929}
   m_Layer: 0
   m_Name: WatchTower
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -384,3 +385,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToGenerate: 10
   pickups: []
+  IsPlaced: 0
+--- !u!114 &1807471647585145929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2265306987326160552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e786f674932df647babb0dd33306896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100

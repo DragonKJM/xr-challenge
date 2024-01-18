@@ -78,7 +78,7 @@ public class PickupTracker : MonoBehaviour
 
         if (scoreScript != null)
         {
-            scoreScript.UpdateScore(pickup.ScoreValue);
+            scoreScript.AddScore(pickup.ScoreValue);
         }
         else
         {
