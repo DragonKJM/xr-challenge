@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollisions : MonoBehaviour
 {
@@ -35,6 +37,9 @@ public class PlayerCollisions : MonoBehaviour
         else if (other.transform.CompareTag("Finish"))
         {
             Debug.Log("PLAYER REACHED GOAL");
+            PlayerPrefs.SetInt("Player Score", GameObject.Find("GUI").GetComponentInChildren<ScoreUIHandler>().GetScore());
+
+            SceneManager.LoadScene("WinMenu");
         }
 
         else if (other.transform.CompareTag("Spawner"))

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Win collision is in PlayerCollisions script
+
 public class Goal : MonoBehaviour
 {
     public bool IsActive { get; private set; }

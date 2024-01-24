@@ -20,6 +20,8 @@ public class WanderAI : MonoBehaviour
 
     private Vector3 circlePosition = new Vector3();
     private Vector3 pointOnCircle = new Vector3();
+
+    [Range(-360.0f, 360.0f)]
     private float angle = 0.0f;
 
     [Header("References")]

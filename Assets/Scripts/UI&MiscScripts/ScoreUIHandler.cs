@@ -45,4 +45,9 @@ public class ScoreUIHandler : MonoBehaviour
 
         isUpdatingScore = false;
     }
+
+    public int GetScore()
+    {
+        return currentScore;
+    }
 }

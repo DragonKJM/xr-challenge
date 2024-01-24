@@ -2,12 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthManager : MonoBehaviour
 {
     [Header("Config")]
     [SerializeField]
     private float health = 100.0f;
+
+    [Header("References")]
+    ScoreUIHandler scoreUIHandler;
+
+    private void Start()
+    {
+        scoreUIHandler = FindObjectOfType<ScoreUIHandler>(); // Not ideal, this is getting a score reference for everything with health. Better solution is to make a higher level manager
+                                                             // which will track what died and how to respond to it - maybe similar to my collectible tracker?
+    }
 
     public void TakeDamage(float damage)
     {
@@ -16,11 +26,10 @@ public class HealthManager : MonoBehaviour
         if (health <= 0)
         {
             if (CompareTag("Enemy"))
-                FindObjectOfType<ScoreUIHandler>().AddScore(50);
+                scoreUIHandler.AddScore(50);
             else if (CompareTag("Building"))
-            {
-                //end game and stuff;
-            }
+                SceneManager.LoadScene("DeathMenu");
+
             Destroy(gameObject);
         }
     }

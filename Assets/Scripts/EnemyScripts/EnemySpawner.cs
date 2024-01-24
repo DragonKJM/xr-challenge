@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Could also have a tracker class for enemies in the scene. Then in here, if enemies in scene >= max enemies, don't spawn more
+
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Config")]
